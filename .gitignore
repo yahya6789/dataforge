@@ -1,0 +1,46 @@
+# Eclipse specific files
+/.classpath
+/.project
+/.settings/
+
+# Maven target directory
+target/
+
+# Compiled class files
+*.class
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+*.bak
+
+# IDE-specific files
+*.iml
+*.idea/
+
+# MacOS system files
+.DS_Store
+
+# Windows system files
+Thumbs.db
+
+# Maven wrapper files
+.mvn/
+mvnw*
+
+# Eclipse JDT specific files
+/.factorypath
+
+# Output folders
+bin/
+
+# Generated files
+*.generated
+
+# Lombok cache
+.lombok/
+
+# Local environment configurations
+.env
