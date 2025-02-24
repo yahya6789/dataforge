@@ -1,6 +1,10 @@
-package io.github.yahya6789.dataforge;
+package io.github.yahya6789.dataforge.impl.template;
 
 import java.math.BigDecimal;
+
+import io.github.yahya6789.dataforge.impl.data.RandomDecimalGenerator;
+import io.github.yahya6789.dataforge.impl.data.RandomIntegerGenerator;
+import io.github.yahya6789.dataforge.impl.data.RandomStringGenerator;
 
 public class SalesCsvTemplate extends CsvTemplate {
   private RandomDecimalGenerator decimalGenerator = new RandomDecimalGenerator(100, 999);

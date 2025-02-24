@@ -1,4 +1,4 @@
-package io.github.yahya6789.dataforge;
+package io.github.yahya6789.dataforge.core.template;
 
 import java.io.Writer;
 

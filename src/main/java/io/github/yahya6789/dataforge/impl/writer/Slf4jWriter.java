@@ -1,4 +1,4 @@
-package io.github.yahya6789.dataforge;
+package io.github.yahya6789.dataforge.impl.writer;
 
 import java.io.IOException;
 import java.io.Writer;
