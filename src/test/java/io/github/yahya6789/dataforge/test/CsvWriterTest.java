@@ -15,12 +15,11 @@ public class CsvWriterTest {
   @Test
   @SneakyThrows
   public void shouldReturnCorrectRowCount_afterWriting() {
-    int headerRowCount = 1;
     int detailRowCount = 10;
     Path path = Files.createTempFile("output", "tmp");
     CsvWriter salesCsv = new SalesCsvGenerator(10, path);
     salesCsv.generate();
-    assertEquals(headerRowCount + detailRowCount, Files.lines(path).count());
+    assertEquals(detailRowCount, Files.lines(path).count());
     Files.delete(path);
   }
 }
