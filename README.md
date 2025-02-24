@@ -28,7 +28,27 @@ String name = randomName.generate();
 System.out.println(name);
 ```
 
-### 2. 📑 Menulis CSV secara Efisien
+### 2. 🏷️ Menggunakan System.out sebagai Output
+```java
+CsvTemplate salesCsv = new SalesCsvTemplate(10);
+salesCsv.generate(new OutputStreamWriter(System.out));
+```
+##### Contoh Output
+```bash
+627.25|150|Ramdhan Danendra|Jl .Gading Jaya No.31
+290.29|761|Rifzan Bram|Jl .Damai Mandiri No.92
+925.10|113|Omar Arselan|Jl .Karunia Lestari No.40
+484.60|572|Fikran Aryad|Jl .Gading Makmur No.62
+240.44|406|Radika Amier|Jl .Manggis Manis No.75
+661.91|249|Tirta Bilqis|Jl .Alam Raya No.15
+912.27|434|Perdana Hilmi|Jl .Anyelir Permai No.88
+541.53|837|Reyhan Haykal|Jl .Gambir Makmur No.153
+166.06|556|Ashrul Alghifari|Jl .Kencana Jaya No.167
+712.11|717|Arthesa Darupono|Jl .Baruna Perkasa No.3
+5561.56|4795||
+```
+
+### 3. 📑 Menulis CSV secara Efisien
 ```java
 BufferedWriter writer = new BufferedWriter(new FileWriter(path.toFile()));
 CsvTemplate salesCsv = new SalesCsvTemplate(1_000_000);  // Menghasilkan 1 juta baris data
