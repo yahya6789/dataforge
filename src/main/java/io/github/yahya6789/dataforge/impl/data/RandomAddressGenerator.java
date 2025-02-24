@@ -11,28 +11,24 @@ import java.util.stream.Collectors;
 import io.github.yahya6789.dataforge.core.data.IRandomGenerator;
 import lombok.SneakyThrows;
 
-public class RandomNameGenerator implements IRandomGenerator<String> {
-  public static final String DEFAULT_FIRST_NAME_RESOURCE = "first_name.txt";
-  public static final String DEFAULT_LAST_NAME_RESOURCE = "last_name.txt";
+public class RandomAddressGenerator implements IRandomGenerator<String> {
+  public static final String DEFAULT_RESOURCE_NAME = "street_name.txt";
 
-  private List<String> firstNames;
-  private List<String> lastNames;
+  private List<String> streetNames;
 
-  public RandomNameGenerator() {
-    this(DEFAULT_FIRST_NAME_RESOURCE, DEFAULT_LAST_NAME_RESOURCE);
+  public RandomAddressGenerator() {
+    this(DEFAULT_RESOURCE_NAME);
   }
 
-  public RandomNameGenerator(String firstNameResource, String lastNameResource) {
-    firstNames = toResourceList(firstNameResource);
-    lastNames = toResourceList(lastNameResource);
+  public RandomAddressGenerator(String resource) {
+    streetNames = toResourceList(resource);
   }
 
   @Override
   public String generate() {
     ThreadLocalRandom random = ThreadLocalRandom.current();
-    String firstName = firstNames.get(random.nextInt(firstNames.size()));
-    String lastName = firstNames.get(random.nextInt(lastNames.size()));
-    return firstName + " " + lastName;
+    String streetName = streetNames.get(random.nextInt(streetNames.size()));
+    return "Jl ." + streetName + " No." + random.nextInt(1, 200);
   }
 
   @Override
@@ -42,7 +38,7 @@ public class RandomNameGenerator implements IRandomGenerator<String> {
 
   @SneakyThrows
   private List<String> toResourceList(String resource) {
-    URL url = RandomNameGenerator.class.getResource("/" + resource);
+    URL url = RandomAddressGenerator.class.getResource("/" + resource);
     if (url == null)
       throw new NullPointerException("Resource not found '" + resource + "'");
     Path path = Paths.get(url.toURI());
