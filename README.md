@@ -35,7 +35,7 @@ salesCsv.generate(writer);
 ```
 
 ## 📜 Lisensi
-Proyek ini dirilis di bawah lisensi CC BY-NC-SA 4.0. Lihat file `LICENSE` untuk detail lebih lanjut.
+Proyek ini dirilis di bawah lisensi MIT. Lihat file `LICENSE` untuk detail lebih lanjut.
 
 ---
 Dikembangkan dengan ❤️ oleh [yahya6789](https://github.com/yahya6789).
