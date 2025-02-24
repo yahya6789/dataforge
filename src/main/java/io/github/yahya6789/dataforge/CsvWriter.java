@@ -8,6 +8,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.apache.commons.lang3.StringUtils;
+
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
@@ -70,7 +72,7 @@ public abstract class CsvWriter implements IFileWriter {
   @SneakyThrows
   public void generate() {
     String header = getHeaders();
-    if (header != null && !header.trim().isEmpty()) {
+    if (StringUtils.isNotBlank(header)) {
       writer.write(header + lineEnding);
     }
 
@@ -105,7 +107,7 @@ public abstract class CsvWriter implements IFileWriter {
     }
 
     String footer = generateTotalRow();
-    if (footer != null && !footer.trim().isEmpty()) {
+    if (StringUtils.isNotBlank(header)) {
       writer.write(footer + lineEnding);
     }
 
