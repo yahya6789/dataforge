@@ -2,7 +2,6 @@ package io.github.yahya6789.dataforge;
 
 import java.io.IOException;
 import java.io.Writer;
-import java.nio.file.Path;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -31,10 +30,9 @@ public abstract class CsvTemplate implements IFileTemplate {
    * Constructor CsvTemplate.
    *
    * @param numRows Jumlah baris yang akan dihasilkan.
-   * @param path    Lokasi penyimpanan file CSV.
    */
   @SneakyThrows
-  public CsvTemplate(long numRows, Path path) {
+  public CsvTemplate(long numRows) {
     this.numRows = numRows;
     this.executorService = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
     this.bufferCounter = new AtomicInteger();

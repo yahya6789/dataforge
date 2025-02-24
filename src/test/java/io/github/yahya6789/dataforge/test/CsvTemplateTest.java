@@ -20,7 +20,7 @@ public class CsvTemplateTest {
     int detailRowCount = 10;
     Path path = Files.createTempFile("output", "tmp");
     BufferedWriter writer = new BufferedWriter(new FileWriter(path.toFile()));
-    CsvTemplate salesCsv = new SalesCsvTemplate(10, path);
+    CsvTemplate salesCsv = new SalesCsvTemplate(10);
     salesCsv.generate(writer);
     assertEquals(detailRowCount, Files.lines(path).count());
     Files.delete(path);

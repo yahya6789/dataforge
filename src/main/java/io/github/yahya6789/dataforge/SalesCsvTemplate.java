@@ -1,7 +1,6 @@
 package io.github.yahya6789.dataforge;
 
 import java.math.BigDecimal;
-import java.nio.file.Path;
 
 public class SalesCsvTemplate extends CsvTemplate {
   private RandomDecimalGenerator decimalGenerator = new RandomDecimalGenerator(100, 999);
@@ -11,8 +10,8 @@ public class SalesCsvTemplate extends CsvTemplate {
   private BigDecimal sumColumn1 = BigDecimal.ZERO;
   private int sumColumn2 = 0;
 
-  public SalesCsvTemplate(long numRows, Path path) {
-    super(numRows, path);
+  public SalesCsvTemplate(long numRows) {
+    super(numRows);
   }
 
   @Override
