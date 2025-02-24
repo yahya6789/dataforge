@@ -3,10 +3,11 @@
 DataForge adalah pustaka Java untuk menghasilkan data secara otomatis dengan kinerja tinggi. Proyek ini dirancang untuk menangani pembuatan data dalam jumlah besar, termasuk pembuatan nama acak dalam bahasa Indonesia dan generator CSV yang efisien.
 
 ## ✨ Fitur
-- **📝 Generator Nama Acak**: Menghasilkan nama acak dari dataset yang dimuat ke dalam memori.
-- **📄 Generator CSV**: Membuat file CSV dengan jutaan baris secara efisien tanpa menyimpan seluruh data dalam memori.
+- **📝 Generator Teks dan Angka**: Menghasilkan teks atau angka acak.
+- **📝 Generator Nama Acak**: Menghasilkan nama lengkap acak dalam bahasa Indonesia.
+- **📝 Generator Alamat Acak**: Menghasilkan alamat acak dalam bahasa Indonesia.
+- **📄 Generator CSV**: Membuat file CSV dengan ratusan juta baris secara efisien.
 - **⚡ Dukungan Multi-Threading**: Mengoptimalkan performa dalam lingkungan multi-threaded.
-- **📊 Logging dengan SLF4J**: Menyediakan logging yang fleksibel dan dapat dikonfigurasi.
 
 ## 📥 Instalasi
 Tambahkan dependensi berikut ke proyek Anda jika menggunakan Maven:
