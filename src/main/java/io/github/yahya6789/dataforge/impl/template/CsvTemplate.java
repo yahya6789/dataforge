@@ -104,7 +104,7 @@ public abstract class CsvTemplate implements IFileTemplate {
     }
 
     String footer = generateTotalRow();
-    if (StringUtils.isNotBlank(header)) {
+    if (StringUtils.isNotBlank(footer)) {
       writer.write(footer + lineEnding);
     }
 

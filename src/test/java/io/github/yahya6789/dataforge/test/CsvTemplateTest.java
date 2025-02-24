@@ -17,12 +17,13 @@ public class CsvTemplateTest {
   @Test
   @SneakyThrows
   public void shouldReturnCorrectRowCount_afterWriting() {
-    int detailRowCount = 10;
+    int headerCount = 1;
+    int detailCount = 10;
     Path path = Files.createTempFile("output", "tmp");
     BufferedWriter writer = new BufferedWriter(new FileWriter(path.toFile()));
-    CsvTemplate salesCsv = new SalesCsvTemplate(10);
+    CsvTemplate salesCsv = new SalesCsvTemplate(detailCount);
     salesCsv.generate(writer);
-    assertEquals(detailRowCount, Files.lines(path).count());
+    assertEquals(headerCount + detailCount, Files.lines(path).count());
     Files.delete(path);
   }
 }
