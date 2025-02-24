@@ -33,7 +33,7 @@ System.out.println(name);
 CsvTemplate salesCsv = new SalesCsvTemplate(10);
 salesCsv.generate(new OutputStreamWriter(System.out));
 ```
-##### Contoh Output
+#### Contoh Output
 ```bash
 627.25|150|Ramdhan Danendra|Jl .Gading Jaya No.31
 290.29|761|Rifzan Bram|Jl .Damai Mandiri No.92
