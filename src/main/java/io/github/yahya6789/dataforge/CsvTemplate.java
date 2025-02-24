@@ -18,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
  * memastikan struktur yang konsisten.
  */
 @Slf4j
-public abstract class CsvWriter implements IFileWriter {
+public abstract class CsvTemplate implements IFileTemplate {
   public static final int BUFFER_SIZE = 1_000_000;
   public static final String DELIMITER = "|";
   public static final int THREAD_POOL_SIZE = 8;
@@ -30,13 +30,13 @@ public abstract class CsvWriter implements IFileWriter {
   private final long numRows;
 
   /**
-   * Constructor CsvWriter.
+   * Constructor CsvTemplate.
    *
    * @param numRows Jumlah baris yang akan dihasilkan.
    * @param path    Lokasi penyimpanan file CSV.
    */
   @SneakyThrows
-  public CsvWriter(long numRows, Path path) {
+  public CsvTemplate(long numRows, Path path) {
     this.numRows = numRows;
     this.executorService = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
     this.writer = new BufferedWriter(new FileWriter(path.toFile()));
