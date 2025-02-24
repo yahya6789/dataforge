@@ -4,12 +4,12 @@ import java.math.BigDecimal;
 
 import io.github.yahya6789.dataforge.impl.data.RandomDecimalGenerator;
 import io.github.yahya6789.dataforge.impl.data.RandomIntegerGenerator;
-import io.github.yahya6789.dataforge.impl.data.RandomStringGenerator;
+import io.github.yahya6789.dataforge.impl.data.RandomNameGenerator;
 
 public class SalesCsvTemplate extends CsvTemplate {
-  private RandomDecimalGenerator decimalGenerator = new RandomDecimalGenerator(100, 999);
-  private RandomIntegerGenerator integerGenerator = new RandomIntegerGenerator(100, 999);
-  private RandomStringGenerator stringGenerator = new RandomStringGenerator(10);
+  private RandomDecimalGenerator randomDecimal = new RandomDecimalGenerator(100, 999);
+  private RandomIntegerGenerator randomInteger = new RandomIntegerGenerator(100, 999);
+  private RandomNameGenerator randomName = new RandomNameGenerator();
 
   private BigDecimal sumColumn1 = BigDecimal.ZERO;
   private int sumColumn2 = 0;
@@ -25,9 +25,9 @@ public class SalesCsvTemplate extends CsvTemplate {
 
   @Override
   protected String generateDetail() {
-    BigDecimal column1 = decimalGenerator.generate();
-    int column2 = integerGenerator.generate();
-    String column3 = stringGenerator.generate();
+    BigDecimal column1 = randomDecimal.generate();
+    int column2 = randomInteger.generate();
+    String column3 = randomName.generate();
 
     sumColumn1 = sumColumn1.add(column1);
     sumColumn2 += column2;
