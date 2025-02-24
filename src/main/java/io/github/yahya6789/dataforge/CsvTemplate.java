@@ -1,8 +1,7 @@
 package io.github.yahya6789.dataforge;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.nio.file.Path;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -23,7 +22,6 @@ public abstract class CsvTemplate implements IFileTemplate {
   public static final String DELIMITER = "|";
   public static final int THREAD_POOL_SIZE = 8;
 
-  private final BufferedWriter writer;
   private final AtomicInteger bufferCounter;
   private final String lineEnding = System.lineSeparator();
   private final ExecutorService executorService;
@@ -39,7 +37,6 @@ public abstract class CsvTemplate implements IFileTemplate {
   public CsvTemplate(long numRows, Path path) {
     this.numRows = numRows;
     this.executorService = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
-    this.writer = new BufferedWriter(new FileWriter(path.toFile()));
     this.bufferCounter = new AtomicInteger();
   }
 
@@ -66,11 +63,11 @@ public abstract class CsvTemplate implements IFileTemplate {
   protected abstract String generateTotalRow();
 
   /**
-   * Menghasilkan CSV dengan jumlah baris yang telah ditentukan.
+   * {@inheritDoc}
    */
   @Override
   @SneakyThrows
-  public void generate() {
+  public void generate(Writer writer) {
     String header = getHeaders();
     if (StringUtils.isNotBlank(header)) {
       writer.write(header + lineEnding);
