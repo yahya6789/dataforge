@@ -8,7 +8,7 @@ import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
 
 import io.github.yahya6789.dataforge.CsvWriter;
-import io.github.yahya6789.dataforge.SalesCsvGenerator;
+import io.github.yahya6789.dataforge.SalesCsvWriter;
 import lombok.SneakyThrows;
 
 public class CsvWriterTest {
@@ -17,7 +17,7 @@ public class CsvWriterTest {
   public void shouldReturnCorrectRowCount_afterWriting() {
     int detailRowCount = 10;
     Path path = Files.createTempFile("output", "tmp");
-    CsvWriter salesCsv = new SalesCsvGenerator(10, path);
+    CsvWriter salesCsv = new SalesCsvWriter(10, path);
     salesCsv.generate();
     assertEquals(detailRowCount, Files.lines(path).count());
     Files.delete(path);

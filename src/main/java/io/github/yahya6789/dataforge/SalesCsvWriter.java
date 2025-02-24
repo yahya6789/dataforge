@@ -3,7 +3,7 @@ package io.github.yahya6789.dataforge;
 import java.math.BigDecimal;
 import java.nio.file.Path;
 
-public class SalesCsvGenerator extends CsvWriter {
+public class SalesCsvWriter extends CsvWriter {
   private RandomDecimalGenerator decimalGenerator = new RandomDecimalGenerator(100, 999);
   private RandomIntegerGenerator integerGenerator = new RandomIntegerGenerator(100, 999);
   private RandomStringGenerator stringGenerator = new RandomStringGenerator(10);
@@ -11,7 +11,7 @@ public class SalesCsvGenerator extends CsvWriter {
   private BigDecimal sumColumn1 = BigDecimal.ZERO;
   private int sumColumn2 = 0;
 
-  public SalesCsvGenerator(long numRows, Path path) {
+  public SalesCsvWriter(long numRows, Path path) {
     super(numRows, path);
   }
 
