@@ -51,7 +51,7 @@ salesCsv.generate(new OutputStreamWriter(System.out));
 ### 3. 📑 Menulis CSV secara Efisien
 ```java
 BufferedWriter writer = new BufferedWriter(new FileWriter(path.toFile()));
-CsvTemplate salesCsv = new SalesCsvTemplate(1_000_000);  // Menghasilkan 1 juta baris data
+CsvTemplate salesCsv = new SalesCsvTemplate(10);  // Menulis 10 baris
 salesCsv.generate(writer);
 ```
 
