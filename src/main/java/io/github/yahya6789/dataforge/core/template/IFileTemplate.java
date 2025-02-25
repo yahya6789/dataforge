@@ -9,7 +9,8 @@ public interface IFileTemplate {
   /**
    * Menghasilkan file dengan menggunakan writer yang telah ditentukan.
    *
-   * @param writer Writer untuk menulis output (bisa ke file atau System.out).
+   * @param numRows Jumlah baris yang akan dihasilkan.
+   * @param writer  Writer untuk menulis output (bisa ke file atau System.out).
    */
-  void generate(Writer writer);
+  void generate(long numRows, Writer writer);
 }

@@ -26,16 +26,12 @@ public abstract class CsvTemplate implements IFileTemplate {
   private final AtomicInteger bufferCounter;
   private final String lineEnding = System.lineSeparator();
   private final ExecutorService executorService;
-  private final long numRows;
 
   /**
    * Constructor CsvTemplate.
-   *
-   * @param numRows Jumlah baris yang akan dihasilkan.
    */
   @SneakyThrows
-  public CsvTemplate(long numRows) {
-    this.numRows = numRows;
+  public CsvTemplate() {
     this.executorService = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
     this.bufferCounter = new AtomicInteger();
   }
@@ -67,7 +63,7 @@ public abstract class CsvTemplate implements IFileTemplate {
    */
   @Override
   @SneakyThrows
-  public void generate(Writer writer) {
+  public void generate(long numRows, Writer writer) {
     String header = getHeaders();
     if (StringUtils.isNotBlank(header)) {
       writer.write(header + lineEnding);

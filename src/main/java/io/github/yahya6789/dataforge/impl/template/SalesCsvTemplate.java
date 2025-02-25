@@ -16,10 +16,6 @@ public class SalesCsvTemplate extends CsvTemplate {
   private BigDecimal sumColumn1 = BigDecimal.ZERO;
   private int sumColumn2 = 0;
 
-  public SalesCsvTemplate(long numRows) {
-    super(numRows);
-  }
-
   @Override
   protected String getHeaders() {
     return null;

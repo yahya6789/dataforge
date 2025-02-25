@@ -27,8 +27,10 @@ public class RandomAddressGenerator implements IRandomGenerator<String> {
   @Override
   public String generate() {
     ThreadLocalRandom random = ThreadLocalRandom.current();
-    String streetName = streetNames.get(random.nextInt(streetNames.size()));
-    return "Jl ." + streetName + " No." + random.nextInt(1, 200);
+    StringBuilder sb = new StringBuilder("Jl .")
+        .append(streetNames.get(random.nextInt(streetNames.size())))
+        .append(" No.").append(random.nextInt(1, 200));
+    return sb.toString();
   }
 
   @Override

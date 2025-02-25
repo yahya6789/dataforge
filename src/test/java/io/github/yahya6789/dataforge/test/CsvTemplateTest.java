@@ -21,8 +21,8 @@ public class CsvTemplateTest {
     int detailCount = 10;
     Path path = Files.createTempFile("output", "tmp");
     BufferedWriter writer = new BufferedWriter(new FileWriter(path.toFile()));
-    CsvTemplate salesCsv = new SalesCsvTemplate(detailCount);
-    salesCsv.generate(writer);
+    CsvTemplate salesCsv = new SalesCsvTemplate();
+    salesCsv.generate(detailCount, writer);
     assertEquals(headerCount + detailCount, Files.lines(path).count());
     Files.delete(path);
   }
