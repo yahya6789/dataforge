@@ -1,17 +1,11 @@
 package io.github.yahya6789.dataforge.impl.data;
 
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.stream.Collectors;
 
-import io.github.yahya6789.dataforge.core.data.IRandomGenerator;
-import lombok.SneakyThrows;
+import io.github.yahya6789.dataforge.core.data.AbstractResourceGenerator;
 
-public class RandomNameGenerator implements IRandomGenerator<String> {
+public class RandomNameGenerator extends AbstractResourceGenerator<String> {
   public static final String DEFAULT_FIRST_NAME_RESOURCE = "first_name.txt";
   public static final String DEFAULT_LAST_NAME_RESOURCE = "last_name.txt";
 
@@ -38,14 +32,5 @@ public class RandomNameGenerator implements IRandomGenerator<String> {
   @Override
   public Class<?> getType() {
     return String.class;
-  }
-
-  @SneakyThrows
-  private List<String> toResourceList(String resource) {
-    URL url = RandomNameGenerator.class.getResource("/" + resource);
-    if (url == null)
-      throw new NullPointerException("Resource not found '" + resource + "'");
-    Path path = Paths.get(url.toURI());
-    return Files.lines(path).parallel().collect(Collectors.toList());
   }
 }
