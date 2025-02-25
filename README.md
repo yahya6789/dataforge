@@ -55,6 +55,14 @@ CsvTemplate salesCsv = new SalesCsvTemplate(1_000_000);  // Menghasilkan 1 juta 
 salesCsv.generate(writer);
 ```
 
+### 4. ⏱️ Benchmark
+Pengujian dilakukan untuk mengukur waktu yang dibutuhkan dalam pembuatan file CSV berisi **50 juta** baris menggunakan **StopWatch**.
+
+- Jumlah baris: 50.000.000
+- Waktu eksekusi: 3 menit 54,379 detik
+
+Metode pengujian menggunakan StopWatch dari Apache Commons Lang untuk mengukur durasi proses.
+
 ## 📜 Lisensi
 Proyek ini dirilis di bawah lisensi MIT. Lihat file `LICENSE` untuk detail lebih lanjut.
 
