@@ -7,6 +7,12 @@ import java.time.Duration;
 
 import org.apache.commons.lang3.time.DurationFormatUtils;
 
+/**
+ * Utility class untuk memformat angka dan nilai lainnya.
+ *
+ * @author Yahya
+ * @version 1.0
+ */
 public class FormatUtil {
   public static final String NUMBER_FORMAT = "###,###.##";
   public static final String DURATION_FORMAT = "HH':'mm':'ss.S";
