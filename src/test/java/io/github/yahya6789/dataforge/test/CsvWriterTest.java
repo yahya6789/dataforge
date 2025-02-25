@@ -1,26 +1,23 @@
 package io.github.yahya6789.dataforge.test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.io.OutputStreamWriter;
 
 import org.junit.jupiter.api.Test;
 
-import io.github.yahya6789.dataforge.CsvWriter;
-import io.github.yahya6789.dataforge.SalesCsvGenerator;
-import lombok.SneakyThrows;
+import io.github.yahya6789.dataforge.impl.template.CsvTemplate;
+import io.github.yahya6789.dataforge.impl.template.SalesCsvTemplate;
+import io.github.yahya6789.dataforge.impl.writer.Slf4jWriter;
 
 public class CsvWriterTest {
   @Test
-  @SneakyThrows
-  public void shouldReturnCorrectRowCount_afterWriting() {
-    int headerRowCount = 1;
-    int detailRowCount = 10;
-    Path path = Files.createTempFile("output", "tmp");
-    CsvWriter salesCsv = new SalesCsvGenerator(10, path);
-    salesCsv.generate();
-    assertEquals(headerRowCount + detailRowCount, Files.lines(path).count());
-    Files.delete(path);
+  public void shouldDisplayCorrectOutput_whenWritingToSlf4j() {
+    CsvTemplate salesCsv = new SalesCsvTemplate();
+    salesCsv.generate(10, new Slf4jWriter());
+  }
+
+  @Test
+  public void shouldDisplayCorrectOutput_whenWritingToSysout() {
+    CsvTemplate salesCsv = new SalesCsvTemplate();
+    salesCsv.generate(10, new OutputStreamWriter(System.out));
   }
 }

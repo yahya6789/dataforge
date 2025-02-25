@@ -1,9 +1,10 @@
-package io.github.yahya6789.dataforge;
+package io.github.yahya6789.dataforge.impl.data;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.concurrent.ThreadLocalRandom;
 
+import io.github.yahya6789.dataforge.core.data.IRandomGenerator;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

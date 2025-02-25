@@ -1,4 +1,4 @@
-package io.github.yahya6789.dataforge;
+package io.github.yahya6789.dataforge.shared;
 
 import java.io.Closeable;
 import java.io.Flushable;
