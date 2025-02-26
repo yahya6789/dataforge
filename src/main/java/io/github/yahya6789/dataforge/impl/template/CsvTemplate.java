@@ -87,7 +87,7 @@ public abstract class CsvTemplate implements IFileTemplate {
       });
     }
 
-    log.atInfo().log("Shutting down {}", executorService.toString());
+    log.atDebug().log("Shutting down {}", executorService.toString());
     this.executorService.shutdown();
 
     while (!executorService.isTerminated()) {
