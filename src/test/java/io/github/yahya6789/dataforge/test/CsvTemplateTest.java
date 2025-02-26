@@ -2,8 +2,9 @@ package io.github.yahya6789.dataforge.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -20,9 +21,9 @@ public class CsvTemplateTest {
     int footerCount = 1;
     int detailCount = 10;
     Path path = Files.createTempFile("output", "tmp");
-    BufferedWriter writer = new BufferedWriter(new FileWriter(path.toFile()));
+    OutputStream stream = new BufferedOutputStream(new FileOutputStream(path.toFile(), false), 128 * 1024);
     CsvTemplate salesCsv = new SalesCsvTemplate();
-    salesCsv.generate(detailCount, writer);
+    salesCsv.generate(detailCount, stream);
     assertEquals(footerCount + detailCount, Files.lines(path).count());
     Files.delete(path);
   }

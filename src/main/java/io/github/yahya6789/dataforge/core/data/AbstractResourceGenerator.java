@@ -1,15 +1,12 @@
 package io.github.yahya6789.dataforge.core.data;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import io.github.yahya6789.dataforge.impl.data.RandomAddressGenerator;
 import lombok.SneakyThrows;
 
 /**
@@ -26,16 +23,21 @@ public abstract class AbstractResourceGenerator<T> implements IResourceGenerator
    *
    * @param resource Nama file resource yang akan dimuat.
    * @return List string yang berisi setiap baris dari file resource.
-   * @throws NullPointerException Jika resource tidak ditemukan.
-   * @throws URISyntaxException   Jika terjadi sintaks URI.
-   * @throws IOException          Jika terjadi kesalahan terkait IO.
+   * @throws IOException        Jika resource tidak ditemukan.
    */
   @SneakyThrows
   protected List<String> toResourceList(String resource) {
-    URL url = RandomAddressGenerator.class.getResource("/" + resource);
-    if (url == null)
-      throw new NullPointerException("Resource not found '" + resource + "'");
-    Path path = Paths.get(url.toURI());
-    return Files.lines(path).parallel().collect(Collectors.toList());
+    List<String> resourceAsList = new ArrayList<String>();
+    try (InputStream stream = getClass().getResourceAsStream("/" + resource);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(stream))) {
+      if (stream == null) {
+        throw new IOException("Resource not found: " + resource);
+      }
+      String line;
+      while ((line = reader.readLine()) != null) {
+        resourceAsList.add(line);
+      }
+    }
+    return resourceAsList;
   }
 }
