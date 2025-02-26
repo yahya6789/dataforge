@@ -1,7 +1,7 @@
 package io.github.yahya6789.dataforge.impl.template;
 
 import java.io.IOException;
-import java.io.Writer;
+import java.io.OutputStream;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -63,25 +63,25 @@ public abstract class CsvTemplate implements IFileTemplate {
    */
   @Override
   @SneakyThrows
-  public void generate(long numRows, Writer writer) {
+  public void generate(long numRows, OutputStream outputStream) {
     String header = getHeaders();
     if (StringUtils.isNotBlank(header)) {
-      writer.write(header + lineEnding);
+      outputStream.write((header + lineEnding).getBytes());
     }
 
     for (int i = 0; i < numRows; i++) {
       executorService.execute(() -> {
         try {
           String detail = generateDetail();
-          writer.write(detail + lineEnding);
+          outputStream.write((detail + lineEnding).getBytes());
           bufferCounter.incrementAndGet();
           if (bufferCounter.intValue() >= BUFFER_SIZE) {
             bufferCounter.set(0);
-            writer.flush();
+            outputStream.flush();
           }
         } catch (IOException e) {
           log.atError().log(e.getMessage(), e);
-          FileUtils.flushAndClose(writer);
+          FileUtils.flushAndClose(outputStream);
           return;
         }
       });
@@ -101,10 +101,10 @@ public abstract class CsvTemplate implements IFileTemplate {
 
     String footer = generateTotalRow();
     if (StringUtils.isNotBlank(footer)) {
-      writer.write(footer + lineEnding);
+      outputStream.write((footer + lineEnding).getBytes());
     }
 
-    log.atDebug().log("Closing {}", writer.toString());
-    FileUtils.flushAndClose(writer);
+    log.atDebug().log("Closing {}", outputStream.toString());
+    FileUtils.flushAndClose(outputStream);
   }
 }

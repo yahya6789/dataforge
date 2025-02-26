@@ -1,6 +1,6 @@
 package io.github.yahya6789.dataforge.core.template;
 
-import java.io.Writer;
+import java.io.OutputStream;
 
 /**
  * Interface untuk class yang menghasilkan file.
@@ -9,8 +9,8 @@ public interface IFileTemplate {
   /**
    * Menghasilkan file dengan menggunakan writer yang telah ditentukan.
    *
-   * @param numRows Jumlah baris yang akan dihasilkan.
-   * @param writer  Writer untuk menulis output (bisa ke file atau System.out).
+   * @param numRows      Jumlah baris yang akan dihasilkan.
+   * @param outputStream OutputStream untuk menulis output.
    */
-  void generate(long numRows, Writer writer);
+  void generate(long numRows, OutputStream outputStream);
 }
