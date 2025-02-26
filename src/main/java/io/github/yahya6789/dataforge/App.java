@@ -1,6 +1,7 @@
 package io.github.yahya6789.dataforge;
 
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -23,8 +24,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class App {
   public static void main(String[] args) {
+    String defaultFilePath = System.getProperty("java.io.tmpdir") + File.separator + "output.csv";
+
     Options options = new Options();
-    options.addOption("o", "output", true, "Path to the output CSV file (default: output.csv)");
+    options.addOption("o", "output", true, "Path to the output CSV file (default: " + defaultFilePath + ")");
     options.addOption("n", "numrows", true, "Number of rows to generate (default: 10 rows)");
     options.addOption("h", "help", false, "Show help");
 
@@ -38,7 +41,7 @@ public class App {
         return;
       }
 
-      String filePath = cmd.getOptionValue("f", "output.csv");
+      String filePath = cmd.getOptionValue("f", defaultFilePath);
       int numRows = Integer.parseInt(cmd.getOptionValue("n", "10"));
 
       Path path = Paths.get(filePath);
@@ -47,10 +50,10 @@ public class App {
 
       StopWatch sw = new StopWatch();
       sw.start();
+      log.atInfo().log("Creating CSV file in '{}'", path.toAbsolutePath());
       csvTemplate.generate(numRows, stream);
       sw.stop();
-      log.atInfo().log("✅ CSV file '{}' generated in {}", path.toAbsolutePath(),
-          FormatUtil.formatDuration(sw.getDuration()));
+      log.atInfo().log("CSV generated in {}", FormatUtil.formatDuration(sw.getDuration()));
     } catch (ParseException e) {
       System.err.println("❌ Error parsing command-line arguments: " + e.getMessage());
       formatter.printHelp("dataforge", options);
