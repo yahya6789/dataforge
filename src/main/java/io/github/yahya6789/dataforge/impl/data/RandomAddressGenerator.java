@@ -21,7 +21,7 @@ public class RandomAddressGenerator extends AbstractResourceGenerator<String> {
   @Override
   public String generate() {
     ThreadLocalRandom random = ThreadLocalRandom.current();
-    StringBuilder sb = new StringBuilder("Jl .")
+    StringBuilder sb = new StringBuilder("Jl. ")
         .append(streetNames.get(random.nextInt(streetNames.size())))
         .append(" No.").append(random.nextInt(1, 200));
     return sb.toString();
