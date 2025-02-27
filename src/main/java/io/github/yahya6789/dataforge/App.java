@@ -1,9 +1,12 @@
 package io.github.yahya6789.dataforge;
 
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -19,11 +22,13 @@ import org.apache.commons.lang3.time.StopWatch;
 import io.github.yahya6789.dataforge.impl.template.CsvTemplate;
 import io.github.yahya6789.dataforge.impl.template.SalesCsvTemplate;
 import io.github.yahya6789.dataforge.shared.FormatUtil;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class App {
   public static void main(String[] args) {
+    printBanner();
     String defaultFilePath = System.getProperty("java.io.tmpdir") + File.separator + "output.csv";
 
     Options options = new Options();
@@ -51,7 +56,7 @@ public class App {
 
       StopWatch sw = new StopWatch();
       sw.start();
-      log.atInfo().log("Creating {} lines of CSV to '{}'", numRowsAsString, path.toAbsolutePath());
+      log.atInfo().log("Writing {} lines of CSV to '{}'", numRowsAsString, path.toAbsolutePath());
       csvTemplate.generate(numRows, stream);
       sw.stop();
       log.atInfo().log("{} lines of CSV generated in {}", numRowsAsString,
@@ -61,6 +66,25 @@ public class App {
       formatter.printHelp("dataforge", options);
     } catch (IOException e) {
       e.printStackTrace();
+    }
+  }
+
+  /**
+   * Menampilkan banner ke console.
+   */
+  @SneakyThrows
+  private static void printBanner() {
+    try (InputStream stream = App.class.getResourceAsStream("/banner.txt")) {
+      if (stream == null) {
+        System.out.println("⚡ DataForge v1.0 ⚡");
+        return;
+      }
+      try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream))) {
+        String line;
+        while ((line = reader.readLine()) != null) {
+          System.out.println(line);
+        }
+      }
     }
   }
 }
