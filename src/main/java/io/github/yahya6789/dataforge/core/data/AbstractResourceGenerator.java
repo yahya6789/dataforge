@@ -28,14 +28,15 @@ public abstract class AbstractResourceGenerator<T> implements IResourceGenerator
   @SneakyThrows
   protected List<String> toResourceList(String resource) {
     List<String> resourceAsList = new ArrayList<String>();
-    try (InputStream stream = getClass().getResourceAsStream("/" + resource);
-        BufferedReader reader = new BufferedReader(new InputStreamReader(stream))) {
+    try (InputStream stream = getClass().getResourceAsStream("/" + resource)) {
       if (stream == null) {
         throw new IOException("Resource not found: " + resource);
       }
-      String line;
-      while ((line = reader.readLine()) != null) {
-        resourceAsList.add(line);
+      try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream))) {
+        String line;
+        while ((line = reader.readLine()) != null) {
+          resourceAsList.add(line);
+        }
       }
     }
     return resourceAsList;
