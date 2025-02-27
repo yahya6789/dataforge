@@ -4,7 +4,7 @@ DataForge adalah pustaka Java untuk menghasilkan data dalam format CSV dengan pe
 ### ✨ Fitur
 * Pembangkitan CSV Super Cepat.
 * Support CSV custom template.
-* Generator Nama dan Alamat acak aalam bahasa Indonesia.
+* Generator Nama dan Alamat acak dalam bahasa Indonesia.
 
 ### 🚀 Instalasi
 * Clone dan Build Repository
