@@ -1,6 +1,8 @@
 package io.github.yahya6789.dataforge.impl.template;
 
 import java.math.BigDecimal;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
 import io.github.yahya6789.dataforge.impl.data.RandomAddressGenerator;
 import io.github.yahya6789.dataforge.impl.data.RandomDecimalGenerator;
@@ -13,8 +15,8 @@ public class SalesCsvTemplate extends CsvTemplate {
   private RandomNameGenerator randomName = new RandomNameGenerator();
   private RandomAddressGenerator randomAddr = new RandomAddressGenerator();
 
-  private BigDecimal sumColumn1 = BigDecimal.ZERO;
-  private int sumColumn2 = 0;
+  private AtomicReference<BigDecimal> sumColumn1 = new AtomicReference<>(BigDecimal.ZERO);
+  private AtomicInteger sumColumn2 = new AtomicInteger(0);
 
   @Override
   protected String getHeaders() {
@@ -28,8 +30,8 @@ public class SalesCsvTemplate extends CsvTemplate {
     String column3 = randomName.generate();
     String column4 = randomAddr.generate();
 
-    sumColumn1 = sumColumn1.add(column1);
-    sumColumn2 += column2;
+    sumColumn1.updateAndGet(value -> value.add(column1));
+    sumColumn2.updateAndGet(value -> value + column2);
 
     return new StringBuilder(column1.toString()).append(DELIMITER)
         .append(column2).append(DELIMITER)
@@ -40,8 +42,8 @@ public class SalesCsvTemplate extends CsvTemplate {
 
   @Override
   protected String generateTotalRow() {
-    return new StringBuilder(sumColumn1.toString()).append(DELIMITER)
-        .append(sumColumn2).append(DELIMITER)
+    return new StringBuilder(sumColumn1.get().toString()).append(DELIMITER)
+        .append(sumColumn2.get()).append(DELIMITER)
         .append("").append(DELIMITER)
         .append("")
         .toString();
