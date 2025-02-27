@@ -4,7 +4,11 @@
 
 ## **✨ Fitur**
 
-✅ **Generasi CSV Cepat** – Mampu menghasilkan **50 juta baris dalam ~1.5 menit** 
+✅ **Pembangkitan CSV Super Cepat** – Mampu menghasilkan **50 juta baris dalam ~1.5 menit**
+
+✅ **Custom CSV Template** – Support CSV custom template.
+
+✅ **Generator Nama dan Alamat** – Support generator nama dan alamat acak dalam bahasa Indonesia.
 
 ✅ **CLI Support** – Gunakan parameter baris perintah untuk mengontrol output
 
@@ -25,7 +29,7 @@ mvn clean package
 Gunakan `java -jar` untuk menjalankan **DataForge** dari terminal:
 
 ```sh
-java -jar target/dataforge.jar -f output.csv -n 100
+java -jar target/dataforge.jar
 ```
 
 **Opsi yang tersedia:**
@@ -39,8 +43,8 @@ java -jar target/dataforge.jar -f output.csv -n 100
 ### **2️⃣ Contoh Kode Penggunaan dalam Java**
 
 ```java
-CsvTemplate csvTemplate = new CsvTemplate();
-csvTemplate.generateCsv("data.csv", 5000000);
+CsvTemplate csvTemplate = new SalesCsvTemplate();
+csvTemplate.generate(10, System.out); // Menulis 10 baris ke console
 ```
 
 ## **⏱️ Benchmark**
