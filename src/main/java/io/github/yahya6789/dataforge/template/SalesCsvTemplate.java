@@ -1,13 +1,13 @@
-package io.github.yahya6789.dataforge.impl.template;
+package io.github.yahya6789.dataforge.template;
 
 import java.math.BigDecimal;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
-import io.github.yahya6789.dataforge.impl.data.RandomAddressGenerator;
-import io.github.yahya6789.dataforge.impl.data.RandomDecimalGenerator;
-import io.github.yahya6789.dataforge.impl.data.RandomIntegerGenerator;
-import io.github.yahya6789.dataforge.impl.data.RandomNameGenerator;
+import io.github.yahya6789.dataforge.data.RandomAddressGenerator;
+import io.github.yahya6789.dataforge.data.RandomDecimalGenerator;
+import io.github.yahya6789.dataforge.data.RandomIntegerGenerator;
+import io.github.yahya6789.dataforge.data.RandomNameGenerator;
 
 public class SalesCsvTemplate extends CsvTemplate {
   private RandomDecimalGenerator randomDecimal = new RandomDecimalGenerator(100, 999);

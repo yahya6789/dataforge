@@ -1,4 +1,4 @@
-package io.github.yahya6789.dataforge.impl.template;
+package io.github.yahya6789.dataforge.template;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -8,7 +8,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.lang3.StringUtils;
 
-import io.github.yahya6789.dataforge.core.template.IFileTemplate;
 import io.github.yahya6789.dataforge.shared.FileUtils;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;

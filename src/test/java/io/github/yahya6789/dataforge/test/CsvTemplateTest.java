@@ -10,8 +10,8 @@ import java.nio.file.Path;
 
 import org.junit.jupiter.api.Test;
 
-import io.github.yahya6789.dataforge.impl.template.CsvTemplate;
-import io.github.yahya6789.dataforge.impl.template.SalesCsvTemplate;
+import io.github.yahya6789.dataforge.template.CsvTemplate;
+import io.github.yahya6789.dataforge.template.SalesCsvTemplate;
 import lombok.SneakyThrows;
 
 public class CsvTemplateTest {

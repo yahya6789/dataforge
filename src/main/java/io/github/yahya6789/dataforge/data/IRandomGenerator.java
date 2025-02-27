@@ -1,4 +1,4 @@
-package io.github.yahya6789.dataforge.core.data;
+package io.github.yahya6789.dataforge.data;
 
 /**
  * Interface generator yang dapat digunakan untuk menghasilkan data acak.

@@ -1,9 +1,7 @@
-package io.github.yahya6789.dataforge.impl.data;
+package io.github.yahya6789.dataforge.data;
 
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
-
-import io.github.yahya6789.dataforge.core.data.AbstractResourceGenerator;
 
 public class RandomAddressGenerator extends AbstractResourceGenerator<String> {
   public static final String DEFAULT_RESOURCE_NAME = "street_name.txt";

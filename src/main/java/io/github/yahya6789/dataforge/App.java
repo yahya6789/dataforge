@@ -19,9 +19,9 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.lang3.time.StopWatch;
 
-import io.github.yahya6789.dataforge.impl.template.CsvTemplate;
-import io.github.yahya6789.dataforge.impl.template.SalesCsvTemplate;
 import io.github.yahya6789.dataforge.shared.FormatUtil;
+import io.github.yahya6789.dataforge.template.CsvTemplate;
+import io.github.yahya6789.dataforge.template.SalesCsvTemplate;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 

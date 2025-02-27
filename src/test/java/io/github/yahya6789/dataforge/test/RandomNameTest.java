@@ -8,11 +8,12 @@ import java.io.IOException;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+
+import io.github.yahya6789.dataforge.data.RandomNameGenerator;
+
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-
-import io.github.yahya6789.dataforge.impl.data.RandomNameGenerator;
 
 @TestMethodOrder(OrderAnnotation.class)
 public class RandomNameTest {

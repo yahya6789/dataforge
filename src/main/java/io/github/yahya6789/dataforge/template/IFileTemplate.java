@@ -1,4 +1,4 @@
-package io.github.yahya6789.dataforge.core.template;
+package io.github.yahya6789.dataforge.template;
 
 import java.io.OutputStream;
 
