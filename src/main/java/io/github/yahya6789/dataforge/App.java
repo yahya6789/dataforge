@@ -43,6 +43,7 @@ public class App {
 
       String filePath = cmd.getOptionValue("f", defaultFilePath);
       int numRows = Integer.parseInt(cmd.getOptionValue("n", "10"));
+      String numRowsAsString = FormatUtil.formatInteger(numRows);
 
       Path path = Paths.get(filePath);
       OutputStream stream = new BufferedOutputStream(new FileOutputStream(path.toFile(), false), 128 * 1024);
@@ -50,10 +51,11 @@ public class App {
 
       StopWatch sw = new StopWatch();
       sw.start();
-      log.atInfo().log("Creating CSV file in '{}'", path.toAbsolutePath());
+      log.atInfo().log("Creating {} lines of CSV to '{}'", numRowsAsString, path.toAbsolutePath());
       csvTemplate.generate(numRows, stream);
       sw.stop();
-      log.atInfo().log("CSV generated in {}", FormatUtil.formatDuration(sw.getDuration()));
+      log.atInfo().log("{} lines of CSV generated in {}", numRowsAsString,
+          FormatUtil.formatDuration(sw.getDuration()));
     } catch (ParseException e) {
       System.err.println("❌ Error parsing command-line arguments: " + e.getMessage());
       formatter.printHelp("dataforge", options);
