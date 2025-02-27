@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
@@ -42,7 +44,7 @@ public class RandomAddressTest {
   @Test
   @Order(3)
   public void shouldThrowException_whenResourceNotFound() {
-    assertThrows(NullPointerException.class, () -> {
+    assertThrows(IOException.class, () -> {
       new RandomAddressGenerator("abc.txt");
     });
   }
@@ -50,7 +52,7 @@ public class RandomAddressTest {
   @Test
   @Order(4)
   public void shouldThrowException_whenResourceIsNull() {
-    assertThrows(NullPointerException.class, () -> {
+    assertThrows(IOException.class, () -> {
       new RandomAddressGenerator(null);
     });
   }
