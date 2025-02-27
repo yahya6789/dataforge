@@ -10,8 +10,7 @@ import java.nio.file.Path;
 
 import org.junit.jupiter.api.Test;
 
-import io.github.yahya6789.dataforge.template.CsvTemplate;
-import io.github.yahya6789.dataforge.template.SalesCsvTemplate;
+import io.github.yahya6789.dataforge.template.IFileTemplate;
 import lombok.SneakyThrows;
 
 public class CsvTemplateTest {
@@ -22,8 +21,8 @@ public class CsvTemplateTest {
     int detailCount = 10;
     Path path = Files.createTempFile("output", "tmp");
     OutputStream stream = new BufferedOutputStream(new FileOutputStream(path.toFile(), false), 128 * 1024);
-    CsvTemplate salesCsv = new SalesCsvTemplate();
-    salesCsv.generate(detailCount, stream);
+    IFileTemplate template = IFileTemplate.getTemplate();
+    template.generate(detailCount, stream);
     assertEquals(footerCount + detailCount, Files.lines(path).count());
     Files.delete(path);
   }
