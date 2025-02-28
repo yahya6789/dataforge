@@ -24,10 +24,9 @@ import lombok.extern.slf4j.Slf4j;
  * @see java.io.BufferedOutputStream
  */
 
-@Slf4j
 public class AutoFlushStream extends FilterOutputStream {
-  private final long flushThreshold = 52_428_800;
-  private AtomicLong byteCount = new AtomicLong(0);
+  private final long flushThreshold;
+  private AtomicLong lineCount = new AtomicLong(0);
 
   /**
    * The internal buffer where data is stored.
@@ -61,11 +60,12 @@ public class AutoFlushStream extends FilterOutputStream {
    * @exception IllegalArgumentException if size &lt;= 0.
    */
   public AutoFlushStream(OutputStream out, int size) {
-    this(out, size, 52_428_800);
+    this(out, size, 1_000_000);
   }
 
   public AutoFlushStream(OutputStream out, int size, long flushThreshold) {
     super(out);
+    this.flushThreshold = flushThreshold;
     if (size <= 0) {
       throw new IllegalArgumentException("Buffer size <= 0");
     }
@@ -77,6 +77,24 @@ public class AutoFlushStream extends FilterOutputStream {
     if (count > 0) {
       out.write(buf, 0, count);
       count = 0;
+    }
+  }
+
+  public synchronized void write(String s) throws IOException {
+    byte[] bytes = s.getBytes();
+    lineCount.incrementAndGet();
+
+    for (int i = 0; i < bytes.length; i++) {
+      if (count >= buf.length) {
+        flushBuffer();
+      }
+      buf[count++] = bytes[i];
+    }
+
+    long lineCountValue = lineCount.get();
+    if (lineCountValue >= flushThreshold) {
+      flush();
+      lineCount.set(0);
     }
   }
 
@@ -92,14 +110,6 @@ public class AutoFlushStream extends FilterOutputStream {
       flushBuffer();
     }
     buf[count++] = (byte) b;
-    byteCount.incrementAndGet();
-
-    long flushCounterValue = byteCount.get();
-    if (flushCounterValue >= flushThreshold) {
-      log.atTrace().log("Flushing {} bytes", flushCounterValue);
-      flush();
-      byteCount.set(0);
-    }
   }
 
   /**

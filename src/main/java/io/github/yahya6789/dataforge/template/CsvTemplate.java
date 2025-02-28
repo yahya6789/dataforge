@@ -1,7 +1,9 @@
 package io.github.yahya6789.dataforge.template;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
+import java.nio.file.Path;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -57,23 +59,33 @@ public abstract class CsvTemplate implements IFileTemplate {
    * {@inheritDoc}
    */
   @Override
-  @SneakyThrows
-  public void generate(long numRows, OutputStream outputStream) {
+  public void generate(long numRows, Path path) {
+    AutoFlushStream stream;
+    try {
+      stream = new AutoFlushStream(new FileOutputStream(path.toFile(), false), 128 * 1024);
+    } catch (FileNotFoundException e) {
+      log.atError().log(e.getMessage(), e);
+      return;
+    }
+
     String header = getHeaders();
     if (StringUtils.isNotBlank(header)) {
-      outputStream.write((header + lineEnding).getBytes());
+      try {
+        stream.write((header + lineEnding).getBytes());
+      } catch (IOException e) {
+        log.atError().log(e.getMessage(), e);
+        FileUtils.flushAndClose(stream);
+        return;
+      }
     }
 
     for (int i = 0; i < numRows; i++) {
       executorService.execute(() -> {
         try {
-          byte[] details = (generateDetail() + lineEnding).getBytes();
-          for (byte b : details) {
-            outputStream.write(b);
-          }
+          stream.write(generateDetail() + lineEnding);
         } catch (IOException e) {
           log.atError().log(e.getMessage(), e);
-          FileUtils.flushAndClose(outputStream);
+          FileUtils.flushAndClose(stream);
           return;
         }
       });
@@ -93,10 +105,16 @@ public abstract class CsvTemplate implements IFileTemplate {
 
     String footer = generateTotalRow();
     if (StringUtils.isNotBlank(footer)) {
-      outputStream.write((footer + lineEnding).getBytes());
+      try {
+        stream.write(footer + lineEnding);
+      } catch (IOException e) {
+        log.atError().log(e.getMessage(), e);
+        FileUtils.flushAndClose(stream);
+        return;
+      }
     }
 
-    log.atDebug().log("Closing {}", outputStream.toString());
-    FileUtils.flushAndClose(outputStream);
+    log.atDebug().log("Closing {}", stream.toString());
+    FileUtils.flushAndClose(stream);
   }
 }
