@@ -1,6 +1,5 @@
 package io.github.yahya6789.dataforge;
 
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -20,6 +19,7 @@ import org.apache.commons.cli.ParseException;
 import org.apache.commons.lang3.time.StopWatch;
 
 import io.github.yahya6789.dataforge.shared.FormatUtil;
+import io.github.yahya6789.dataforge.template.AutoFlushStream;
 import io.github.yahya6789.dataforge.template.CsvTemplate;
 import io.github.yahya6789.dataforge.template.SalesCsvTemplate;
 import lombok.SneakyThrows;
@@ -51,7 +51,7 @@ public class App {
       String numRowsAsString = FormatUtil.formatInteger(numRows);
 
       Path path = Paths.get(filePath);
-      OutputStream stream = new BufferedOutputStream(new FileOutputStream(path.toFile(), false), 128 * 1024);
+      OutputStream stream = new AutoFlushStream(new FileOutputStream(path.toFile(), false), 128 * 1024);
       CsvTemplate csvTemplate = new SalesCsvTemplate();
 
       StopWatch sw = new StopWatch();

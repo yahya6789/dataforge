@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -18,11 +17,9 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public abstract class CsvTemplate implements IFileTemplate {
-  public static final int BUFFER_SIZE = 1_000_000;
   public static final String DELIMITER = "|";
   public static final int THREAD_POOL_SIZE = 8;
 
-  private final AtomicInteger bufferCounter;
   private final String lineEnding = System.lineSeparator();
   private final ExecutorService executorService;
 
@@ -32,7 +29,6 @@ public abstract class CsvTemplate implements IFileTemplate {
   @SneakyThrows
   public CsvTemplate() {
     this.executorService = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
-    this.bufferCounter = new AtomicInteger();
   }
 
   /**
@@ -71,12 +67,9 @@ public abstract class CsvTemplate implements IFileTemplate {
     for (int i = 0; i < numRows; i++) {
       executorService.execute(() -> {
         try {
-          String detail = generateDetail();
-          outputStream.write((detail + lineEnding).getBytes());
-          bufferCounter.incrementAndGet();
-          if (bufferCounter.intValue() >= BUFFER_SIZE) {
-            bufferCounter.set(0);
-            outputStream.flush();
+          byte[] details = (generateDetail() + lineEnding).getBytes();
+          for (byte b : details) {
+            outputStream.write(b);
           }
         } catch (IOException e) {
           log.atError().log(e.getMessage(), e);
